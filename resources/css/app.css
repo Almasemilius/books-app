@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wrapper{
+    @apply container py-24 lg:py-40;
+}
+
+.input-group{
+    @apply flex flex-col gap-3;
+}
+
+.input-field{
+    @apply p-3 w-full border;
+}
