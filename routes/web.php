@@ -4,6 +4,7 @@ use App\Http\Livewire\Pages\BooksPage;
 use App\Http\Livewire\Pages\HomePage;
 use App\Http\Livewire\Pages\LoginPage;
 use App\Http\Livewire\Pages\RegisterPage;
+use App\Http\Livewire\Pages\UsersPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,5 @@ Route::get('/',HomePage::class)->name('home');
 Route::get('login', LoginPage::class)->name('login');
 Route::get('register', RegisterPage::class)->name('register');
 Route::get('books', BooksPage::class)->name('books');
+Route::get('users', UsersPage::class)->name('users');
+Route::get('logout', [LoginPage::class,'logout'])->name('logout');

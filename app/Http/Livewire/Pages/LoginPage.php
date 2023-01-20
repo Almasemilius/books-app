@@ -26,13 +26,19 @@ class LoginPage extends Component
             $user = User::where('email', $this->email)->first();
             Auth::login($user);
             if($user->role == 'admin'){
-                return redirect()->intended('/');
+                return redirect()->intended('books');
             }else{
                 return redirect()->intended('/');
             }
         }else{
             $this->addError('failed-auth' , 'Wrong Credentials');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
     }
     public function render()
     {

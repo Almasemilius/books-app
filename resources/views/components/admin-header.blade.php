@@ -1,4 +1,4 @@
-<nav class="bg-white h-20 lg:h-32 w-full flex items-center shadow-md fixed">
+<nav class="bg-white h-20 lg:h-32 w-full flex items-center shadow-md fixed z-10">
     <div class="px-10 flex items-center justify-between w-full">
         <div class="h-16 w-16 md:h-20 md:w-20 lg:h-28 lg:w-28">
             <img src="{{asset('assets/logo.png')}}" alt="">
@@ -11,27 +11,29 @@
         </div>
         <ul class="hidden lg:flex gap-10">
             <li>
-                <a class="hover:text-[#f9a828] @if (Route::is('home'))
+                <a class="hover:text-[#f9a828] @if (Route::is('books'))
                 text-[#f9a828]
-                @endif" href="{{route('home')}}">Home</a>
+                @endif" href="{{route('books')}}">Home</a>
+            </li>
+            <!-- <li>
+                <a class="hover:text-[#f9a828] @if (Route::is('books'))
+                text-[#f9a828]
+                @endif" href="{{route('books')}}">Books</a>
+            </li> -->
+            <li>
+                <a class="hover:text-[#f9a828] @if (Route::is('users'))
+                text-[#f9a828]
+                @endif" href="{{route('users')}}">Users</a>
             </li>
             <li>
-                <a class="hover:text-[#f9a828] @if (Route::is(''))
-                @endif" href="#">Books</a>
-            </li>
-            <li>
-                <a class="hover:text-[#f9a828] @if (Route::is(''))
-                @endif" href="#">Users</a>
-            </li>
-            <li>
-                @if (auth()->user())
+                @if (empty(auth()->user()))
                 <a class="hover:text-[#f9a828] @if (Route::is('login'))
                 text-[#f9a828]
                 @endif" href="{{route('login')}}">Login</a>
                 @else
                 <a class="hover:text-[#f9a828] @if (Route::is('login'))
                 text-[#f9a828]
-                @endif" href="{{route('login')}}">Logout</a>
+                @endif" href="{{route('logout')}}">Logout</a>
                 @endif
             </li>
 

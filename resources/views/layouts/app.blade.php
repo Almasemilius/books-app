@@ -12,7 +12,7 @@
 </head>
 <body class="">
     {{$slot}}
+    @livewireScripts
 </body>
-@livewireScripts
 
 </html>

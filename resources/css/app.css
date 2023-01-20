@@ -7,9 +7,32 @@
 }
 
 .input-group{
-    @apply flex flex-col gap-3;
+    @apply w-full flex flex-col gap-3;
 }
 
 .input-field{
     @apply p-3 w-full border;
+}
+
+.grid-display{
+    @apply grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-4;
+}
+
+.tbl{
+    @apply w-full table-auto border border-collapse ;
+}
+
+.tbl th{
+    @apply  py-3;
+}
+.tbl td{
+    @apply border border-gray-300 py-3 text-gray-700;
+}
+
+.t-head{
+    @apply bg-gray-100 text-gray-500;
+}
+
+[x-cloak] {
+    display: none !important;
 }

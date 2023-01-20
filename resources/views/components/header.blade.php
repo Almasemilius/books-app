@@ -1,5 +1,5 @@
-<nav class="bg-white h-20 lg:h-32 w-full flex items-center shadow-md fixed">
-    <div class="px-10 flex items-center justify-between w-full">
+<nav class="bg-white h-20 lg:h-32 w-full flex items-center shadow-md fixed z-20">
+    <div class="px-10 flex items-center justify-between w-full z-20">
         <div class="h-16 w-16 md:h-20 md:w-20 lg:h-28 lg:w-28">
             <img src="{{asset('assets/logo.png')}}" alt="">
         </div>
@@ -21,14 +21,14 @@
                 @endif transition-all duration-500" href="#">Favourite</a>
             </li>
             <li>
-                @if (auth()->user())
+                @if (empty(auth()->user()))
                 <a class="hover:text-[#f9a828] @if (Route::is('login'))
                 text-[#f9a828]
                 @endif transition-all duration-500" href="{{route('login')}}">Login</a>
                 @else
                 <a class="hover:text-[#f9a828] @if (Route::is('login'))
                 text-[#f9a828]
-                @endif" href="{{route('login')}}">Logout</a>
+                @endif" href="{{route('logout')}}">Logout</a>
                 @endif
             </li>
 
