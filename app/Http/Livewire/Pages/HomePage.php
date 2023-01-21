@@ -23,13 +23,27 @@ class HomePage extends Component
         }
     }
 
+    public function addToBookmark(Book $book)
+    {
+        if (auth()->user()) {
+            $favourite = DB::table('favourites')->where('user_id', auth()->user()->id)
+                ->where('book_id', $book->id)->first();
+            if($favourite){
+                $book->favourite()->detach(auth()->user());
+            }else{
+                $book->favourite()->attach(auth()->user());
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+
     public function render()
     {
         $books = Book::query();
 
         if(auth()->user()){
-
-            $data['books'] = $books->with('userLikes')->paginate(15);
+            $data['books'] = $books->with('userLikes','userFavourites')->paginate(15);
         }
         $data['books'] = $books->paginate(15);
        

@@ -28,4 +28,16 @@ class Book extends Model
             return $this->user()->where('user_id', auth()->user()->id);
         }
     }
+
+    public function favourite()
+    {
+        return $this->belongsToMany(User::class,'favourites');
+    }
+
+    public function userFavourites()
+    {
+        if(auth()->user()){
+            return $this->favourite()->where('user_id', auth()->user()->id);
+        }
+    }
 }

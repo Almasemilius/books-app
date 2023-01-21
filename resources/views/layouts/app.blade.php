@@ -31,9 +31,9 @@
                 @endif transition-all duration-500" href="{{route('home')}}">Home</a>
                 </li>
                 <li @click="drawer = false">
-                    <a class="@if (Route::is(''))
+                    <a class="@if (Route::is('favourites'))
                     
-                    @endif transition-all duration-500" href="#">Favourite</a>
+                    @endif transition-all duration-500" href="{{route('favourites')}}">Favourite</a>
                 </li>
                 <li @click="drawer = false">
                     @if (empty(auth()->user()))

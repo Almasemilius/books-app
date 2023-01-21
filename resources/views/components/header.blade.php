@@ -19,9 +19,9 @@
                 @endif transition-all duration-500" href="{{route('home')}}">Home</a>
             </li>
             <li>
-                <a class="hover:text-[#f9a828] @if (Route::is(''))
+                <a class="hover:text-[#f9a828] @if (Route::is('favourites'))
                     
-                @endif transition-all duration-500" href="#">Favourite</a>
+                @endif transition-all duration-500" href="{{route('favourites')}}">Favourite</a>
             </li>
             <li>
                 @if (empty(auth()->user()))
