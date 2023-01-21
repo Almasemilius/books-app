@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function(Blueprint $table){
-            $table->unsignedBigInteger('book_id');
-            $table->foreign('book_id')->references('id')->on('books')->cascadeOnDelete();
+        Schema::create('comments', function(Blueprint $table){
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')->references('id')->on('books')->cascadeOnDelete();
             $table->primary(['book_id','user_id']);
         });
     }
@@ -29,7 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
-        
+        Schema::dropIfExists('comments');
     }
 };

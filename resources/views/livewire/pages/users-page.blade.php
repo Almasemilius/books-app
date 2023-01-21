@@ -19,12 +19,12 @@
             </div>
             <div class="input-group col-span-2 lg:col-span-1">
                 <label for="password">Password</label>
-                <input class="input-field" type="text" id="password"></input>
+                <input wire:model="password" class="input-field" type="text" id="password"></input>
             </div>
             <div class="col-span-2 w-full flex justify-center py-5">
                 <button @if (!$user->id)
                     disabled
-                @endif class="py-3 px-16 border border-[#f9a828] rounded-md text-[#f9a828] hover:text-white hover:bg-[#f9a828] text-lg transition-all duration-500">Update</button>
+                    @endif class="py-3 px-16 border border-[#f9a828] rounded-md text-[#f9a828] hover:text-white hover:bg-[#f9a828] text-lg transition-all duration-500">Update</button>
             </div>
         </form>
         <div class="mt-10 shadow-md">
@@ -66,7 +66,7 @@
                         <td>
                             <div class="flex justify-evenly">
                                 <span>
-                                    <a wire:click="editProduct({{$user->id}})" href="#">Edit</a>
+                                    <a wire:click="editUser({{$user->id}})" href="#">Edit</a>
                                 </span>
                                 <span>
                                     <a @click="deleteModal = true , @this.set('userId',{{$user->id}})" class="text-red-400 hover:text-red-700" href="#">Delete</a>
@@ -78,6 +78,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="w-full py-5 ">
+                {{$users->links()}}
+            </div>
         </div>
         <div x-show="deleteModal" class="fixed flex justify-center items-center h-screen w-screen bg-black bg-opacity-50 z-30 top-0 left-0" x-cloak>
             <div @click.away="deleteModal = false" class="w-1/3 bg-white rounded-md p-10 flex flex-col gap-3 justify-center items-center">
@@ -91,7 +94,7 @@
                     Are you sure you want to delete this item?
                 </p>
                 <div class="w-full flex justify-evenly">
-                    <button wire:click="deleteItem" @click="deleteModal = false"  class="py-4 w-28 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-md">Delete</button>
+                    <button wire:click="deleteItem" @click="deleteModal = false" class="py-4 w-28 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-md">Delete</button>
                     <button @click="deleteModal = false" class="py-4 w-28 border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white rounded-md">Cancel</button>
 
                 </div>

@@ -37,7 +37,9 @@
                 </div>
             </div>
             @endforeach
-           
+        </div>
+        <div class="w-full py-5 ">
+            {{$books->links()}}
         </div>
     </div>
 </div>

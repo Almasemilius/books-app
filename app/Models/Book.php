@@ -40,4 +40,9 @@ class Book extends Model
             return $this->favourite()->where('user_id', auth()->user()->id);
         }
     }
+
+    public function comments()
+    {
+        return $this->belongsToMany(User::class,'comments');
+    }
 }

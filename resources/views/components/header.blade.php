@@ -25,6 +25,14 @@
                     
                 @endif transition-all duration-500" href="{{route('favourites')}}">Favourite</a>
             </li>
+            @if (!empty(auth()->user()) && (auth()->user()->role == 'admin'))
+            
+            <li>
+                <a class="hover:text-[#f9a828] transition-all duration-500" href="{{route('books')}}">Admin</a>
+            </li>
+            @endif
+
+
             <li>
                 @if (empty(auth()->user()))
                 <a class="hover:text-[#f9a828] @if (Route::is('login'))

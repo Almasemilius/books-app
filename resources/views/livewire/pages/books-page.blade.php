@@ -25,13 +25,19 @@
             <!-- Book Cover Section -->
             @foreach ($books as $book)
             <div class="shadow-md relative z-0">
-                <div class="bg-black h-72">
+                <div class="w-full h-72">
+                    @if ($book->cover)
+                    <img alt="{{$book->name}}" class="w-full h-full object-cover" src="{{ asset('storage/books/'.$book->cover) }}">
+                    @else
+                    <div class="h-full w-full bg-gray-600">
+                    </div>
+                    @endif
                 </div>
                 <div class="p-5 space-y-3">
                     <h1 class="text-lg">{{$book->name}}.</h1>
                     <h1>By: <span class="text-sm">{{$book->author}}</span></h1>
                     <!-- Action Buttons section -->
-                    <div @click="options = !options" class="bg-white h-10 w-10 bg-opacity-0 hover:bg-opacity-50 transition-all duration-500 absolute top-0 right-2 rounded-full flex justify-center items-center">
+                    <div @click="options = !options" class="bg-gray-600 h-10 w-10 bg-opacity-70 hover:bg-opacity-50 transition-all duration-500 absolute top-0 right-2 rounded-full flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
                         </svg>
@@ -51,6 +57,9 @@
             @endforeach
 
         </div>
+        <div class="w-full py-5 ">
+            {{$books->links()}}
+        </div>
 
         <div x-show="deleteModal" class="fixed flex justify-center items-center h-screen w-screen bg-black bg-opacity-50 z-30 top-0 left-0" x-cloak>
             <div @click.away="deleteModal = false" class="w-1/3 bg-white rounded-md p-10 flex flex-col gap-3 justify-center items-center">
@@ -64,7 +73,7 @@
                     Are you sure you want to delete this item?
                 </p>
                 <div class="w-full flex justify-evenly">
-                    <button wire:click="deleteItem" @click="deleteModal = false"  class="py-4 w-28 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-md">Delete</button>
+                    <button wire:click="deleteItem" @click="deleteModal = false" class="py-4 w-28 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white rounded-md">Delete</button>
                     <button @click="deleteModal = false" class="py-4 w-28 border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white rounded-md">Cancel</button>
 
                 </div>

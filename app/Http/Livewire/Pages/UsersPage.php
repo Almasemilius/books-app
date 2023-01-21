@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\Pages;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class UsersPage extends Component
 {
     public User $user;
+    public $password;
 
     protected $rules = [
         'user.name' => 'required',
@@ -19,7 +21,7 @@ class UsersPage extends Component
     {
         $this->user = new User();
     }
-    public function editProduct(User $user)
+    public function editUser(User $user)
     {
         $this->user = $user;
     }
@@ -32,8 +34,12 @@ class UsersPage extends Component
     
     public function updateUser()
     {
+        if($this->password){
+            $this->user->password = Hash::make($this->password);
+        }
         $this->user->save();
         $this->user = new User();
+        $this->password = '';
     }
 
     public function render()
