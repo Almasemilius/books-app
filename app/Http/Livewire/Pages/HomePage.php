@@ -6,9 +6,11 @@ use App\Models\Book;
 use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class HomePage extends Component
 {
+    use WithPagination;
     public $comment;
     
     public function likeBook(Book $book)
@@ -44,11 +46,13 @@ class HomePage extends Component
     public function addComment(Book $book)
     {
         if (auth()->user()) {
-            if ($this->comment) {
-                $book->comments()->attach(auth()->user(),$this->comment);
+            $comment = DB::table('comments')->where('user_id', auth()->user()->id)
+                ->where('book_id', $book->id)->first();
+            if ($this->comment && !$comment) {
+                $book->comments()->attach(auth()->user(), ['comment' => $this->comment]);
                 $this->comment = "";
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
@@ -58,9 +62,11 @@ class HomePage extends Component
         $books = Book::query();
 
         if (auth()->user()) {
-            $data['books'] = $books->with('userLikes', 'userFavourites')->paginate(15);
+            $data['books'] = $books->with('userLikes', 'userFavourites','comments')->paginate(15);
         }
+        // dd($data['books']);
         $data['books'] = $books->paginate(15);
+
 
         // dd($data);
         return view('livewire.pages.home-page', $data);

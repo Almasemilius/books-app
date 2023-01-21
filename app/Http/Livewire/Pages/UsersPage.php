@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Pages;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UsersPage extends Component
 {
+    use WithPagination;
     public User $user;
     public $password;
 

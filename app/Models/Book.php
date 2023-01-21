@@ -43,6 +43,6 @@ class Book extends Model
 
     public function comments()
     {
-        return $this->belongsToMany(User::class,'comments');
+        return $this->belongsToMany(User::class,'comments')->withPivot(['comment'])->take(2);
     }
 }

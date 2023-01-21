@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Pages;
 use App\Models\Book;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class FavouritePage extends Component
 {
+    use WithPagination;
     public $comment;
     public function likeBook(Book $book)
     {
@@ -30,7 +32,7 @@ class FavouritePage extends Component
             $comment = DB::table('comments')->where('user_id', auth()->user()->id)
                 ->where('book_id', $book->id)->first();
             if ($this->comment && !$comment) {
-                $book->comments()->attach(auth()->user(), $this->comment);
+                $book->comments()->attach(auth()->user(), ['comment' => $this->comment]);
                 $this->comment = "";
             }
         } else {

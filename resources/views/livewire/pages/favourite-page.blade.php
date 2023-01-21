@@ -44,21 +44,34 @@
                             </svg>
                         </div>
                     </div>
-                    
-                    <div x-show="comment_{{$book->id}}" class="w-full flex  items-center" x-cloak>
-                        <input wire:model='comment.comment' type="text" class="my-2 input-field bg-gray-200 rounded-full w-4/5">
-                        <span wire:click="addComment({{$book->id}})" class="w-1/5 flex justify-center rounded-full cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-gray-700">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                            </svg>
-                        </span>
+
+                    <div x-show="comment_{{$book->id}}" class="" x-cloak>
+                        @if (count($book->comments) > 0)
+                        <div class="w-full">
+                            @foreach ($book->comments as $comment)
+                            <div class="p-2">
+                                <p>{{$comment->pivot->comment}}</p>
+
+                            </div>
+                            <hr>
+                            @endforeach
+                        </div>
+                        @endif
+                        <div class="w-full flex  items-center">
+                            <input wire:model='comment' type="text" class="my-2 input-field bg-gray-200 rounded-full w-4/5">
+                            <span wire:click="addComment({{$book->id}})" class="w-1/5 flex justify-center rounded-full cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-gray-700">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
         <div class="w-full py-5 ">
-            {{$books->links('pagination::tailwind')}}
+            {{$books->links()}}
         </div>
     </div>
 </div>
