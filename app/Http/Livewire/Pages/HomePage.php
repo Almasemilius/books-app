@@ -14,9 +14,9 @@ class HomePage extends Component
             $like = DB::table('likes')->where('user_id', auth()->user()->id)
                 ->where('book_id', $book->id)->first();
             if($like){
-                $book->user()->detach(auth()->user());
+                $book->likes()->detach(auth()->user());
             }else{
-                $book->user()->attach(auth()->user());
+                $book->likes()->attach(auth()->user());
             }
         }else{
             return redirect()->route('login');

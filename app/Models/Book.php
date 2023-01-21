@@ -25,7 +25,7 @@ class Book extends Model
     public function userLikes()
     {
         if (auth()->user()) {
-            return $this->user()->where('user_id', auth()->user()->id);
+            return $this->likes()->where('user_id', auth()->user()->id);
         }
     }
 

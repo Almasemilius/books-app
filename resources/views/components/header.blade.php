@@ -1,7 +1,9 @@
 <nav class="bg-white h-20 lg:h-32 w-full flex items-center shadow-md fixed z-20">
     <div class="px-10 flex items-center justify-between w-full z-20">
         <div class="h-16 w-16 md:h-20 md:w-20 lg:h-28 lg:w-28">
-            <img src="{{asset('assets/logo.png')}}" alt="">
+            <a href="{{route('home')}}">
+                <img src="{{asset('assets/logo.png')}}" alt="">
+            </a>
         </div>
         <!-- Drawer Button -->
         <div @click="drawer=true" class="lg:hidden">
