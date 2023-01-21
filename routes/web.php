@@ -22,9 +22,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/',HomePage::class)->name('home');
+Route::get('/', HomePage::class)->name('home');
+Route::get('logout', [LoginPage::class, 'logout'])->name('logout');
 Route::get('login', LoginPage::class)->name('login');
 Route::get('register', RegisterPage::class)->name('register');
-Route::get('books', BooksPage::class)->name('books');
-Route::get('users', UsersPage::class)->name('users');
-Route::get('logout', [LoginPage::class,'logout'])->name('logout');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('users', UsersPage::class)->name('users');
+    Route::get('books', BooksPage::class)->name('books');
+});

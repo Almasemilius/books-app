@@ -1,5 +1,4 @@
 <div>
-    <x-admin-header />
     <div x-data="{options : false , deleteModal : false}" class="wrapper">
         <form wire:submit.prevent="addBook" class="grid grid-cols-2 gap-5 shadow-md lg:p-10">
             <div class="input-group col-span-2 lg:col-span-1">

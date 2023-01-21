@@ -3,15 +3,37 @@
 namespace App\Http\Livewire\Pages;
 
 use App\Models\Book;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class HomePage extends Component
 {
+    public function likeBook(Book $book)
+    {
+        if (auth()->user()) {
+            $like = DB::table('likes')->where('user_id', auth()->user()->id)
+                ->where('book_id', $book->id)->first();
+            if($like){
+                $book->user()->detach(auth()->user());
+            }else{
+                $book->user()->attach(auth()->user());
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+
     public function render()
     {
         $books = Book::query();
 
-        $books = $books->paginate(15);
-        return view('livewire.pages.home-page',compact('books'));
+        if(auth()->user()){
+
+            $data['books'] = $books->with('userLikes')->paginate(15);
+        }
+        $data['books'] = $books->paginate(15);
+       
+        // dd($data);
+        return view('livewire.pages.home-page', $data);
     }
 }

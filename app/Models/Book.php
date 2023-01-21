@@ -16,4 +16,16 @@ class Book extends Model
         'author',
         'cover',
     ];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
+
+    public function userLikes()
+    {
+        if (auth()->user()) {
+            return $this->user()->where('user_id', auth()->user()->id);
+        }
+    }
 }

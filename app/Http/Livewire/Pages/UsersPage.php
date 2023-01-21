@@ -41,6 +41,6 @@ class UsersPage extends Component
         $users = User::query();
 
         $users = $users->paginate(10);
-        return view('livewire.pages.users-page',compact('users'));
+        return view('livewire.pages.users-page',compact('users'))->layout('layouts.admin');
     }
 }
