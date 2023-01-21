@@ -58,7 +58,7 @@
             @endforeach
         </div>
         <div class="w-full py-5 ">
-            {{$books->links()}}
+            {{$books->links('pagination::tailwind')}}
         </div>
     </div>
 </div>

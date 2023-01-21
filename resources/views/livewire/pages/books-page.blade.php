@@ -58,7 +58,7 @@
 
         </div>
         <div class="w-full py-5 ">
-            {{$books->links()}}
+            {{$books->links('pagination::tailwind')}}
         </div>
 
         <div x-show="deleteModal" class="fixed flex justify-center items-center h-screen w-screen bg-black bg-opacity-50 z-30 top-0 left-0 p-5 lg:p-0" x-cloak>

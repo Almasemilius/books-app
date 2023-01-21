@@ -62,7 +62,11 @@ class AuthController extends Controller
                 $data = ['token' => $token, 'user' => $user];
 
                 return response()->json($data);
+            } else {
+                return response()->json(['error' => "Incorrect Password"], 500);
             }
+        } else {
+            return response()->json(['error' => "User Not found"], 500);
         }
     }
 
@@ -73,9 +77,8 @@ class AuthController extends Controller
         if ($user) {
             $user->tokens()->delete();
             return response()->json("Logged Out");
-        }else{
+        } else {
             return response()->json(['error' => "User Not found"], 500);
-
         }
     }
 }

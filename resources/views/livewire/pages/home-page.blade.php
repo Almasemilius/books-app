@@ -3,7 +3,7 @@
     <div class="wrapper">
         <div class="grid-display">
             @foreach ($books as $book)
-            <div x-data="{comment_{{$book->id}} : false, description_{{$book->id}} : false}" class="shadow-md">
+            <div x-data="{comment_{{$book->id}} : false, description_{{$book->id}} : false}" wire:key="{{$book->id}}" class="shadow-md">
                 <!-- Book Cover Section -->
                 <div class="w-full h-72">
                     @if ($book->cover)
@@ -36,7 +36,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <div wire:click="addToBookmark({{$book->id}})" class="cursor-pointer">
+                        <div wire:click.prevent="addToBookmark({{$book->id}})" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 lg:w-8 lg:h-8 @if(auth()->user() && count($book->userFavourites) > 0)
                                     fill-[#f9a828]
                                 @endif">
@@ -57,8 +57,8 @@
             </div>
             @endforeach
         </div>
-        <div class="w-full py-5 ">
-            {{$books->links()}}
+        <div class="w-full py-5">
+            {{$books->links('pagination::tailwind')}}
         </div>
     </div>
 </div>
