@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('book_id');
             $table->foreign('book_id')->references('id')->on('books')->cascadeOnDelete();
-            $table->text('comment');
             $table->primary(['book_id','user_id']);
         });
     }

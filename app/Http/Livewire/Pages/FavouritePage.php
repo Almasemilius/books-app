@@ -8,17 +8,32 @@ use Livewire\Component;
 
 class FavouritePage extends Component
 {
+    public $comment;
     public function likeBook(Book $book)
     {
         if (auth()->user()) {
             $like = DB::table('likes')->where('user_id', auth()->user()->id)
                 ->where('book_id', $book->id)->first();
-            if($like){
+            if ($like) {
                 $book->likes()->detach(auth()->user());
-            }else{
+            } else {
                 $book->likes()->attach(auth()->user());
             }
-        }else{
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function addComment(Book $book)
+    {
+        if (auth()->user()) {
+            $comment = DB::table('comments')->where('user_id', auth()->user()->id)
+                ->where('book_id', $book->id)->first();
+            if ($this->comment && !$comment) {
+                $book->comments()->attach(auth()->user(), $this->comment);
+                $this->comment = "";
+            }
+        } else {
             return redirect()->route('login');
         }
     }
@@ -28,12 +43,12 @@ class FavouritePage extends Component
         if (auth()->user()) {
             $favourite = DB::table('favourites')->where('user_id', auth()->user()->id)
                 ->where('book_id', $book->id)->first();
-            if($favourite){
+            if ($favourite) {
                 $book->favourite()->detach(auth()->user());
-            }else{
+            } else {
                 $book->favourite()->attach(auth()->user());
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }

@@ -45,7 +45,7 @@ class HomePage extends Component
     {
         if (auth()->user()) {
             if ($this->comment) {
-                $book->comments()->attach(auth()->user());
+                $book->comments()->attach(auth()->user(),$this->comment);
                 $this->comment = "";
             }
         }else{
