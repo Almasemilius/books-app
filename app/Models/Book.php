@@ -17,7 +17,7 @@ class Book extends Model
         'cover',
     ];
 
-    public function user()
+    public function likes()
     {
         return $this->belongsToMany(User::class, 'likes');
     }
