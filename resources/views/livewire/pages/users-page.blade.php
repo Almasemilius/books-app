@@ -27,7 +27,7 @@
                     @endif class="py-3 px-16 border border-[#f9a828] rounded-md text-[#f9a828] hover:text-white hover:bg-[#f9a828] text-lg transition-all duration-500">Update</button>
             </div>
         </form>
-        <div class="mt-10 shadow-md">
+        <div class="mt-10 shadow-md intro-y  overflow-auto lg:overflow-visible">
             <table class="tbl">
                 <thead class="">
                     <tr class="t-head">
